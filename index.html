@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#082d52">
+<meta name="description" content="Live weather forecasts for cities across Punjab, Pakistan.">
+<title>Punjab Weather — Live Forecasts</title>
+<style>
+:root{--navy:#082d52;--blue:#12558b;--sky:#eaf5ff;--gold:#ffc928;--ink:#102b4e;--muted:#60758e;--card:rgba(255,255,255,.94)}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--ink);background:#f0f7fd}
+header{background:linear-gradient(110deg,#062747,#163f66);color:white;padding:14px max(18px,calc((100% - 1200px)/2));display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;font-size:clamp(22px,3vw,32px);font-weight:850;letter-spacing:-1px}.brand .sun{font-size:42px}.brand span span{color:var(--gold)}.tagline{font-size:12px;letter-spacing:1.5px;color:#d8e7f7;font-weight:500}
+nav{display:flex;align-items:center;gap:8px;flex-wrap:wrap}button,.btn{border:0;cursor:pointer;font:inherit;font-weight:700;border-radius:24px;padding:10px 16px;background:var(--gold);color:#112d4c}nav button{background:transparent;color:white;padding:9px 12px}nav button:hover{background:#ffffff20}
+.hero{color:white;background:linear-gradient(90deg,rgba(5,33,59,.76),rgba(5,33,59,.18)),url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2000&q=85') center 55%/cover;padding:48px 20px 44px}
+.hero-inner{max-width:1200px;margin:auto;display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}.eyebrow{font-style:italic;font-size:clamp(20px,3vw,30px);margin:0 0 8px}.hero h1{font-size:clamp(42px,7vw,70px);line-height:1.02;margin:0 0 14px;letter-spacing:-2px}.hero h1 span{color:var(--gold)}.hero p{line-height:1.7;max-width:580px;margin:0 0 20px}
+.search{display:flex;background:white;border-radius:40px;padding:5px;max-width:620px;box-shadow:0 8px 24px #001a3b30}.search input{min-width:0;flex:1;border:0;outline:0;padding:12px 16px;border-radius:30px;font-size:15px;color:#123}
+.weather-card{background:rgba(5,31,56,.9);border:1px solid #ffffff35;border-radius:20px;padding:24px;box-shadow:0 15px 40px #00152b50}.locationline{display:flex;justify-content:space-between;gap:10px;align-items:start}.locationline h2{margin:0;font-size:24px}.small{font-size:13px;color:#d9e9f9}.live{color:#67efaa}.current{display:flex;align-items:center;gap:20px;margin:22px 0}.bigicon{font-size:78px;line-height:1}.temp{font-size:clamp(50px,7vw,76px);font-weight:800;line-height:1}.condition{font-size:18px;font-weight:700;margin-top:6px}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;border-top:1px solid #ffffff25;padding-top:18px}.metric{font-size:13px;color:#dbeaf8}.metric b{display:block;font-size:18px;color:white;margin-top:4px}
+main{max-width:1200px;margin:22px auto;padding:0 16px}.grid{display:grid;grid-template-columns:1.25fr .75fr;gap:18px}.panel{background:var(--card);border:1px solid #d7e7f8;border-radius:14px;padding:18px;margin-bottom:16px;box-shadow:0 4px 14px #0c47700a}.panel h2{font-size:20px;margin:0 0 16px;display:flex;align-items:center;justify-content:space-between;gap:8px}.forecast{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}.day{text-align:center;padding:10px 4px;border-right:1px solid #dce8f5}.day:last-child{border:0}.day strong,.day small{display:block}.day small{color:var(--muted);margin-top:4px}.icon{font-size:30px;margin:12px 0}.highlow{font-size:16px;font-weight:800}.highlow span{font-weight:500;color:var(--muted)}.desc{font-size:12px;margin-top:7px;color:#4d6680}.cities{display:grid}.city{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 2px;border-bottom:1px solid #e1ebf6;cursor:pointer}.city:last-child{border:0}.city:hover{color:#1471bd}.cityname{display:flex;align-items:center;gap:10px;font-weight:700}.citytemp{font-weight:750;white-space:nowrap}.hourly{display:grid;grid-template-columns:repeat(8,minmax(55px,1fr));overflow-x:auto;gap:4px}.hour{text-align:center;padding:8px 2px;border-right:1px solid #e1ebf6;font-size:12px}.hour .icon{font-size:23px;margin:10px 0}.hour b{font-size:15px}.feature{border-radius:14px;overflow:hidden;min-height:280px;color:white;padding:24px;display:flex;flex-direction:column;justify-content:end;background:linear-gradient(0deg,#052711e8,transparent 75%),url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=85') center/cover;margin-bottom:16px}.feature h2{font-size:32px;font-style:italic;margin:0}.feature p{max-width:390px;line-height:1.6;margin-bottom:0}.maplink{background:#e7f3ff;border:1px solid #cce3fa;border-radius:12px;padding:18px;display:flex;align-items:center;justify-content:space-between;gap:12px}.maplink a{color:#0b477d;font-weight:750;text-decoration:none}.status{font-size:13px;color:#d7e9f8;margin-top:10px}.error{color:#a61b1b;font-size:13px;margin:10px 5px 0}.loading{opacity:.7}footer{text-align:center;color:#6b7e91;font-size:13px;padding:22px}
+[dir=rtl] body{text-align:right}[dir=rtl] .hero-inner,[dir=rtl] .current{direction:rtl}
+@media(max-width:800px){.hero-inner,.grid{grid-template-columns:1fr}.hero{padding:32px 16px}.weather-card{max-width:600px}.hero-inner{gap:20px}.feature{min-height:230px}.brand .sun{font-size:34px}header{padding:12px 16px}}
+@media(max-width:480px){nav{width:100%;justify-content:space-between}nav button{padding:7px;font-size:12px}.forecast{grid-template-columns:repeat(5,minmax(62px,1fr));overflow-x:auto}.panel{padding:13px}.weather-card{padding:18px}.bigicon{font-size:60px}.metrics{gap:4px}.metric{font-size:11px}.metric b{font-size:16px}.search button{padding:10px 13px}.hero h1{letter-spacing:-1px}}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <div class="brand"><span class="sun">🌤️</span><span>Punjab <span>Weather</span></span></div>
+    <div class="tagline">LIVE WEATHER • ACCURATE • RELIABLE</div>
+  </div>
+  <nav><button onclick="goTop()">⌂ Home</button><button onclick="focusSearch()">⌕ Search city</button><button onclick="toggleLanguage()" id="langBtn">اردو</button></nav>
+</header>
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <p class="eyebrow" id="eyebrow">Live Weather Updates</p>
+      <h1 id="heroTitle">Punjab <span>Weather</span></h1>
+      <p id="intro">Real-time weather information for cities across Punjab. Plan your day with current conditions and up-to-date forecasts.</p>
+      <form class="search" id="searchForm">
+        <input id="cityInput" placeholder="Search city (e.g. Lahore, Faisalabad, Multan…)" aria-label="Search city" value="Lahore">
+        <button type="submit" id="searchBtn">⌕ Search</button>
+      </form>
+      <div class="status" id="status">Connecting to live weather…</div>
+      <div class="error" id="error" role="status"></div>
+    </div>
+    <section class="weather-card" aria-live="polite">
+      <div class="locationline"><div><h2 id="cityHeading">📍 Lahore</h2><div class="small" id="region">Punjab, Pakistan</div></div><div style="text-align:right"><div class="small"><span class="live">●</span> Live</div><div class="small" id="updated"></div></div></div>
+      <div class="current"><div class="bigicon" id="currentIcon">🌤️</div><div><div class="temp"><span id="temp">--</span><span style="font-size:.46em">°C</span></div><div class="condition" id="condition">Loading weather…</div></div></div>
+      <div class="metrics">
+        <div class="metric">🌡 Feels like<b id="feels">--°C</b></div>
+        <div class="metric">💧 Humidity<b id="humidity">--%</b></div>
+        <div class="metric">🌬 Wind<b id="wind">-- km/h</b></div>
+      </div>
+    </section>
+  </div>
+</section>
+<main>
+  <div class="grid">
+    <div>
+      <section class="panel"><h2><span id="fiveTitle">▦ 5-Day Forecast</span><span class="small" id="forecastCity">📍 Lahore</span></h2><div class="forecast" id="forecast"><div>Loading forecast…</div></div></section>
+      <section class="panel"><h2><span id="hourTitle">◷ Hourly Forecast</span><span class="small" id="hourCity">📍 Lahore</span></h2><div class="hourly" id="hourly"><div>Loading hourly forecast…</div></div></section>
+    </div>
+    <div>
+      <section class="feature"><h2>Punjab</h2><strong id="featureSub">Land of Beauty & Agriculture</strong><p id="featureText">From sunny fields to cloudy skies, get weather updates for cities across Punjab.</p></section>
+      <section class="panel"><h2 id="popularTitle">📍 Popular Cities</h2><div class="cities" id="cities"></div></section>
+      <section class="maplink"><div><strong id="mapTitle">🗺 Punjab Weather Map</strong><div class="small" style="color:#58708a" id="mapDesc">Explore weather across the province</div></div><a href="https://www.openstreetmap.org/" target="_blank" rel="noopener" id="mapOpen">Open ↗</a></section>
+    </div>
+  </div>
+  <section class="panel" style="display:flex;gap:20px;justify-content:space-around;flex-wrap:wrap;text-align:center">
+    <div>🛡️ <b>Accurate data</b><div class="small" style="color:#58708a">Weather-service updates</div></div>
+    <div>⚡ <b>Fast & reliable</b><div class="small" style="color:#58708a">No API key required</div></div>
+    <div>📍 <b>Punjab cities</b><div class="small" style="color:#58708a">Search city forecasts</div></div>
+    <div>📱 <b>Mobile friendly</b><div class="small" style="color:#58708a">Works on your phone</div></div>
+  </section>
+</main>
+<footer>Punjab Weather · Weather data by <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> · Forecasts are estimates and may change.</footer>
+<script>
+const $=id=>document.getElementById(id);
+let lang='en', currentCity='Lahore';
+const cityList=['Lahore','Faisalabad','Multan','Rawalpindi','Gujranwala','Sialkot','Bahawalpur','Sargodha'];
+const words={
+ en:{eyebrow:'Live Weather Updates',intro:'Real-time weather information for cities across Punjab. Plan your day with current conditions and up-to-date forecasts.',placeholder:'Search city (e.g. Lahore, Faisalabad, Multan…)',search:'⌕ Search',five:'▦ 5-Day Forecast',hour:'◷ Hourly Forecast',popular:'📍 Popular Cities',featureSub:'Land of Beauty & Agriculture',featureText:'From sunny fields to cloudy skies, get weather updates for cities across Punjab.',mapTitle:'🗺 Punjab Weather Map',mapDesc:'Explore weather across the province',region:'Punjab, Pakistan',days:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],today:'Today',feels:'🌡 Feels like',humidity:'💧 Humidity',wind:'🌬 Wind',loading:'Connecting to live weather…',live:'Live weather loaded',error:'Could not find that city. Try Lahore, Multan, or Faisalabad.',condition:['Clear sky','Mainly clear','Partly cloudy','Overcast','Fog','Drizzle','Rain','Snow','Rain showers','Snow showers','Thunderstorm']},
+ ur:{eyebrow:'موسم کی تازہ ترین معلومات',intro:'پنجاب کے شہروں کا تازہ موسم دیکھیں۔ موجودہ درجہ حرارت اور اگلے دنوں کی پیش گوئی حاصل کریں۔',placeholder:'شہر تلاش کریں (مثلاً لاہور، فیصل آباد، ملتان)',search:'تلاش کریں',five:'▦ پانچ دن کا موسم',hour:'◷ فی گھنٹہ موسم',popular:'📍 مشہور شہر',featureSub:'خوبصورتی اور زراعت کی سرزمین',featureText:'پنجاب کے شہروں میں دھوپ، بادل اور بارش کی تازہ معلومات حاصل کریں۔',mapTitle:'🗺 پنجاب موسم کا نقشہ',mapDesc:'پورے صوبے کا موسم دیکھیں',region:'پنجاب، پاکستان',days:['اتوار','پیر','منگل','بدھ','جمعرات','جمعہ','ہفتہ'],today:'آج',feels:'🌡 محسوس شدہ',humidity:'💧 نمی',wind:'🌬 ہوا',loading:'موسم کی معلومات حاصل ہو رہی ہیں…',live:'تازہ موسم لوڈ ہوگیا',error:'شہر نہیں ملا۔ لاہور، ملتان یا فیصل آباد آزمائیں.',condition:['صاف آسمان','زیادہ تر صاف','جزوی ابر آلود','ابر آلود','دھند','بوندا باندی','بارش','برف باری','بارش کی پھوار','برف کی پھوار','گرج چمک']}
+};
+function weatherInfo(code){if(code===0)return [0,'☀️'];if(code===1)return [1,'🌤️'];if(code===2)return [2,'🌤️'];if(code===3)return [3,'☁️'];if(code===45||code===48)return [4,'🌫️'];if([51,53,55,56,57].includes(code))return [5,'🌦️'];if([61,63,65,66,67,80,81,82].includes(code))return [6,'🌧️'];if([71,73,75,77,85,86].includes(code))return [7,'🌨️'];if([95,96,99].includes(code))return [10,'⛈️'];return [3,'☁️']}
+function condition(code){return words[lang].condition[weatherInfo(code)[0]]}
+function dateLabel(date,idx){let d=new Date(date+'T12:00:00');return idx===0?words[lang].today:words[lang].days[d.getDay()]}
+function fmtDate(date){return new Date(date+'T12:00:00').toLocaleDateString(lang==='ur'?'ur-PK':'en-PK',{month:'short',day:'numeric'})}
+async function loadCity(name){
+  $('error').textContent='';$('status').textContent=words[lang].loading;$('status').classList.add('loading');
+  try{
+    const geo=await fetch('https://geocoding-api.open-meteo.com/v1/search?name='+encodeURIComponent(name)+'&count=1&language='+(lang==='ur'?'ur':'en')+'&format=json');
+    if(!geo.ok)throw Error('Network issue');
+    const gj=await geo.json();if(!gj.results?.length)throw Error('city');
+    const place=gj.results[0];currentCity=place.name;
+    const url=`https://api.open-meteo.com/v1/forecast?latitude=${place.latitude}&longitude=${place.longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,weather_code,wind_speed_10m&hourly=temperature_2m,precipitation_probability,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&forecast_days=5&timezone=auto`;
+    const res=await fetch(url);if(!res.ok)throw Error('Network issue');const d=await res.json();render(place,d);
+    $('status').textContent=words[lang].live+' · '+new Date().toLocaleTimeString(lang==='ur'?'ur-PK':'en-PK',{hour:'2-digit',minute:'2-digit'});
+    $('status').classList.remove('loading');$('cityInput').value=place.name;
+  }catch(e){$('status').classList.remove('loading');$('status').textContent='';$('error').textContent=e.message==='city'?words[lang].error:'Weather service is temporarily unavailable. Check your internet and try again.'}
+}
+function render(place,d){
+ const c=d.current, [ci,ico]=weatherInfo(c.weather_code);
+ $('cityHeading').textContent='📍 '+place.name;$('region').textContent=(place.admin1?place.admin1+', ':'')+(place.country||'Pakistan');
+ $('temp').textContent=Math.round(c.temperature_2m);$('currentIcon').textContent=ico;$('condition').textContent=condition(c.weather_code);
+ $('feels').textContent=Math.round(c.apparent_temperature)+'°C';$('humidity').textContent=c.relative_humidity_2m+'%';$('wind').textContent=Math.round(c.wind_speed_10m)+' km/h';
+ $('updated').textContent=new Date().toLocaleDateString(lang==='ur'?'ur-PK':'en-PK',{month:'short',day:'numeric'})+' · '+new Date().toLocaleTimeString(lang==='ur'?'ur-PK':'en-PK',{hour:'2-digit',minute:'2-digit'});
+ $('forecastCity').textContent='📍 '+place.name;$('hourCity').textContent='📍 '+place.name;
+ $('forecast').innerHTML=d.daily.time.map((day,i)=>{let wi=weatherInfo(d.daily.weather_code[i]);return `<div class="day"><strong>${dateLabel(day,i)}</strong><small>${fmtDate(day)}</small><div class="icon">${wi[1]}</div><div class="highlow">${Math.round(d.daily.temperature_2m_max[i])}° <span>/ ${Math.round(d.daily.temperature_2m_min[i])}°</span></div><div class="desc">${condition(d.daily.weather_code[i])}</div></div>`}).join('');
+ const now=new Date();let start=d.hourly.time.findIndex(t=>new Date(t)>=now);if(start<0)start=0;
+ $('hourly').innerHTML=d.hourly.time.slice(start,start+8).map((t,j)=>{let i=start+j, dt=new Date(t), wi=weatherInfo(d.hourly.weather_code[i]);return `<div class="hour"><div>${dt.toLocaleTimeString(lang==='ur'?'ur-PK':'en-PK',{hour:'numeric'})}</div><div class="icon">${wi[1]}</div><b>${Math.round(d.hourly.temperature_2m[i])}°</b><div style="color:#1b66b0;margin-top:5px">${d.hourly.precipitation_probability[i]??0}%</div></div>`}).join('');
+}
+function renderCities(){ $('cities').innerHTML=cityList.map(c=>`<div class="city" tabindex="0" role="button" onclick="loadCity('${c}')" onkeydown="if(event.key==='Enter')loadCity('${c}')"><span class="cityname"><span style="font-size:24px">🌤️</span>${c}</span><span class="citytemp">View forecast ›</span></div>`).join('') }
+function applyLanguage(){
+ const w=words[lang];document.documentElement.lang=lang;document.documentElement.dir=lang==='ur'?'rtl':'ltr';
+ $('eyebrow').textContent=w.eyebrow;$('intro').textContent=w.intro;$('cityInput').placeholder=w.placeholder;$('searchBtn').textContent=w.search;
+ $('fiveTitle').textContent=w.five;$('hourTitle').textContent=w.hour;$('popularTitle').textContent=w.popular;$('featureSub').textContent=w.featureSub;$('featureText').textContent=w.featureText;$('mapTitle').textContent=w.mapTitle;$('mapDesc').textContent=w.mapDesc;$('langBtn').textContent=lang==='en'?'اردو':'English';
+ $('feels').parentElement.childNodes[0].textContent=w.feels+' ';$('humidity').parentElement.childNodes[0].textContent=w.humidity+' ';$('wind').parentElement.childNodes[0].textContent=w.wind+' ';
+ renderCities();
+}
+function toggleLanguage(){lang=lang==='en'?'ur':'en';applyLanguage();loadCity(currentCity)}
+function focusSearch(){$('cityInput').focus();window.scrollTo({top:0,behavior:'smooth'})}function goTop(){window.scrollTo({top:0,behavior:'smooth'})}
+$('searchForm').addEventListener('submit',e=>{e.preventDefault();const q=$('cityInput').value.trim();if(q)loadCity(q)});
+applyLanguage();loadCity('Lahore');
+</script>
+</body>
+</html>
